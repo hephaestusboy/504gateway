@@ -1,8 +1,10 @@
 import requests
 import webbrowser
+import certifi
+import ssl
 from time import sleep
-
-def fetch_with_retries(url, max_retries=5, delay=5):
+context =ssl._create_unverified_context()
+def fetch_with_retries(url, max_retries=100, delay=5):
     """
     Fetches a URL with retry logic for 504 Gateway Timeout errors.
 
@@ -34,7 +36,7 @@ def fetch_with_retries(url, max_retries=5, delay=5):
                 raise
 
 if __name__ == "__main__":
-    url_to_fetch = 'https://example.com'  # Replace with the URL you want to fetch
+    url_to_fetch = 'http://app.ktu.edu.in/eu/anon/refferError.htm'  # Replace with the URL you want to fetch
     try:
         url_to_open = fetch_with_retries(url_to_fetch)
         print(f"Success! Opening {url_to_open} in the web browser.")
